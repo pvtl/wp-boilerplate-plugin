@@ -3,7 +3,7 @@
 /**
  * Plugin Name:     Plugin Placeholders by Pivotal
  * Plugin URI:      https://github.com/pvtl/wp-plugin-placeholders.git
- * Description:     Adds a plugin custom post type, taxonomy and fields
+ * Description:     Adds a plugin placeholder custom post type, taxonomy and fields
  * Author:          Pivotal Agency
  * Author URI:      http://pivotal.agency
  * Text Domain:     plugin-placeholders
@@ -13,12 +13,12 @@
  * @package         Plugin_Placeholders
  */
 
-namespace App\Plugins;
+namespace App\Plugins\Pvtl;
 
-class PvtlPluginPlaceholders
+class PluginPlaceholders
 {
     // The name of the plugin (for cosmetic purposes)
-    protected $pluginName = 'Plugin';
+    protected $pluginName = 'Plugin Placeholders';
 
     // The post type's slug eg. plugin-placeholder
     protected $postType = 'plugin-placeholder';
@@ -131,4 +131,4 @@ if (!defined('ABSPATH')) {
     exit;  // Exit if accessed directly
 }
 
-$pvtlPlugin-Placeholders = new PvtlPluginPlaceholders();
+$pvtlPluginPlaceholders = new PluginPlaceholders();

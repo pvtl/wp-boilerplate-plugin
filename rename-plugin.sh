@@ -19,8 +19,8 @@ NO_UNDERLINE="\e[0m"
 
 FIND_SINGULAR="Plugin\sPlaceholder"
 FIND_PLURAL="Plugin\sPlaceholders"
-# REPLACE_SINGULAR="Case Study"
-# REPLACE_PLURAL="Case Studies"
+# REPLACE_SINGULAR="Case\sStudy"
+# REPLACE_PLURAL="Case\sStudies"
 
 echo -e "${BLUE}\n?? Please enter the ${UNDERLINE}singular (& capitalised)${NO_UNDERLINE} name for the plugin/post-type: [eg. Case Stud${UNDERLINE}y${NO_UNDERLINE}] ${RESET}"
 read -p "== " REPLACE_SINGULAR
@@ -29,12 +29,16 @@ if [[ -z "$REPLACE_SINGULAR" ]]; then
   exit 1
 fi
 
+REPLACE_SINGULAR=$(echo $REPLACE_SINGULAR | tr " " "\\s")
+
 echo -e "${BLUE}\n?? Please enter the ${UNDERLINE}plural (& capitalised)${NO_UNDERLINE} name for the plugin/post-type: [eg. Case Stud${UNDERLINE}ies${NO_UNDERLINE}] ${RESET}"
 read -p "== " REPLACE_PLURAL
 if [[ -z "$REPLACE_PLURAL" ]]; then
   echo "Please enter a name..."
   exit 1
 fi
+
+REPLACE_PLURAL=$(echo $REPLACE_PLURAL | tr " " "\\s")
 
 FIND_SINGULAR_SLUG="plugin-placeholder"
 FIND_PLURAL_SLUG="plugin-placeholders"
@@ -73,8 +77,10 @@ replaceFileNames () {
 
 # Find/Replace contents of all files
 replaceContents () {
-    find . -type f -name '*.php' -o -name '*.md' -o -name '*.json' \
-        -exec sed -i 's/'"$1"'/'"$2"'/g' {} +
+    for file in $(find . -type f -name '*.php' -o -name '*.md' -o -name '*.json')
+    do
+      sed -i 's/'"$1"'/'"$2"'/g' $file
+    done
 }
 
 # Run

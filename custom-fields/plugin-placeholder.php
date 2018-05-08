@@ -2,7 +2,7 @@
 if (function_exists('acf_add_local_field_group')):
     acf_add_local_field_group(array(
         'key' => 'group_5aebb2875a1c1',
-        'title' => 'Plugin',
+        'title' => 'Plugin Placeholder',
         'fields' => array(
             array(
                 'key' => 'field_5aebb45d9527e',

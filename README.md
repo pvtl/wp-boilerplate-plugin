@@ -1,3 +1,26 @@
+# A Boilerplate Wordpress Plugin by Pivotal
+
+This is a generic plugin for including a new custom post type, taxonomy + some defaults for theming the output on the front-end.
+Simply run the `rename-plugin.sh` script, input your new plugin name and it'll rename everything.
+
+## Usage
+
+__Step 1.__
+
+- Clone this repo
+- Run `bash rename-plugin.sh`
+- Delete the rename.plugin.sh
+
+__Step 2.__
+
+- Activate the plugin
+- Import the `<this_plugins_dir>/custom-fields/acf-export.json` into ACF > Tools
+- Modify the fields
+- __Export the JSON__ file + __Generate the PHP__ (replacing the existing files)
+- Update the front-end templates to include the fields
+
+---
+
 # Plugin Placeholder Wordpress Plugin by Pivotal
 
 - A `plugin-placeholder` custom post type

@@ -120,3 +120,5 @@ replaceContents "5aebb" $RAND
 
   # Remove the $FILLERSPACE
 replaceContents $FILLERSPACE " "
+
+exit 1

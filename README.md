@@ -1,22 +1,40 @@
 # A Boilerplate Wordpress Plugin by Pivotal
 
-This is a generic plugin for including a new custom post type, taxonomy + some defaults for theming the output on the front-end.
-Simply run the `rename-plugin.sh` script, input your new plugin name and it'll rename everything.
+This is a boilerplate plugin which, by default:
 
-## Usage
+- Creates a new custom post type
+- Creates a new taxonomy
+- Adds the defaults for outputting and theming the front-end
+
+## Creating your own plugin
 
 __Step 1.__
 
-- Clone this repo
-- Run `bash rename-plugin.sh`
-- Delete the rename.plugin.sh
+_*The following should be run from your plugins directory_
+
+```bash
+# 1. Replace my-new-plugin with your new plugin's name
+YOUR_NEW_PLUGIN_NAME="my-new-plugin"
+
+# 2. Clone the repo
+git clone https://github.com/pvtl/wp-boilerplate-plugin.git $YOUR_NEW_PLUGIN_NAME
+
+# 3. Remove .git
+cd $YOUR_NEW_PLUGIN_NAME && rm -rf .git
+
+# 4. Automatically rename the plugin
+bash rename-plugin.sh
+
+# 5. Delete rename-plugin.sh - you don't need it anymore
+rm rename-plugin.sh
+```
 
 __Step 2.__
 
 - Activate the plugin
-- Import the `<this_plugins_dir>/custom-fields/acf-export.json` into ACF > Tools
+- Import the `<this_plugin_dir>/custom-fields/acf-export.json` into __ACF > Tools__
 - Modify the fields
-- __Export the JSON__ file + __Generate the PHP__ (replacing the existing files)
+- __Export the JSON__ file + __Generate the PHP__ (replacing the existing file contents in `<this_plugin_dir>/custom-fields/`)
 - Update the front-end templates to include the fields
 
 ---
@@ -37,20 +55,15 @@ The default front-end templates make use of [Foundation](https://foundation.zurb
 
 ## Installation
 
-__If you're using [Bedrock](https://github.com/roots/bedrock):__
+_*The following should be run from your plugins directory_
 
 ```bash
-git clone https://github.com/pvtl/wp-plugin-placeholders.git web/app/plugins/pvtl-plugin-placeholders
-rm -rf web/app/plugins/pvtl-plugin-placeholders/.git
+git clone https://github.com/pvtl/wp-plugin-placeholders.git pvtl-plugin-placeholders
+rm -rf pvtl-plugin-placeholders/.git
 ```
 
 - Activate the plugin
 - Update the project's `.gitignore` so that the plugin is included in the repo
-
-__Alternatively:__
-
-- Download this repo as a zip
-- Upload the archive to your Wordpress plugin directory and activate the plugin
 
 ## How do I...?
 

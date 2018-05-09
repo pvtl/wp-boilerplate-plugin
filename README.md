@@ -8,34 +8,40 @@ This is a boilerplate plugin which, by default:
 
 ## Creating your own plugin
 
-__Step 1.__
+### Step 1.
 
 _*The following should be run from your plugins directory_
 
+__1.1 Clone the repo__
+
 ```bash
-# 1. Replace my-new-plugin with your new plugin's name
-YOUR_NEW_PLUGIN_NAME="my-new-plugin"
+git clone https://github.com/pvtl/wp-boilerplate-plugin.git <YOUR_NEW_PLUGIN_NAME>
+```
 
-# 2. Clone the repo
-git clone https://github.com/pvtl/wp-boilerplate-plugin.git $YOUR_NEW_PLUGIN_NAME
+__1.2 Remove .git - we're starting a new plugin after all__
 
-# 3. Remove .git
-cd $YOUR_NEW_PLUGIN_NAME && rm -rf .git
+```bash
+cd <YOUR_NEW_PLUGIN_NAME> && rm -rf .git
+```
 
-# 4. Automatically rename the plugin
+__1.3 Automatically rename the plugin__
+
+```bash
 bash rename-plugin.sh
+```
 
-# 5. Delete rename-plugin.sh - you don't need it anymore
+__1.4 Delete rename-plugin.sh - you don't need it anymore__
+
+```bash
 rm rename-plugin.sh
 ```
 
-__Step 2.__
+### Step 2.
 
 - Activate the plugin
 - Import the `<this_plugin_dir>/custom-fields/acf-export.json` into __ACF > Tools__
-- Modify the fields
-- __Export the JSON__ file + __Generate the PHP__ (replacing the existing file contents in `<this_plugin_dir>/custom-fields/`)
-- Update the front-end templates to include the fields
+- Modify the fields and __Export the JSON__ file + __Generate the PHP__ (replacing the existing file contents in `<this_plugin_dir>/custom-fields/`)
+- Update the front-end templates to include any of the fields you need
 
 ---
 

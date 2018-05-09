@@ -17,6 +17,7 @@ BLUE="\e[34m"
 UNDERLINE="\e[4m"
 NO_UNDERLINE="\e[0m"
 FILLERSPACE="FILLERSPACE"
+RAND=$(cat /dev/urandom | LC_CTYPE=C tr -dc 'a-z0-9' | fold -w 5 | head -n 1)
 
 FIND_SINGULAR="Plugin\sPlaceholder"
 FIND_PLURAL="Plugin\sPlaceholders"
@@ -111,8 +112,11 @@ replaceContents $FIND_PLURAL_UNDERSCORE $REPLACE_PLURAL_UNDERSCORE
 replaceContents $FIND_SINGULAR_UNDERSCORE $REPLACE_SINGULAR_UNDERSCORE
 
   # Lowercase Underscore - eg. case_study and case_studies
-replaceContents $FIND_PLURAL_UNDERSCORE_LOWER $REPLACE_PLURAL_UNDERSCORE_LOWER
 replaceContents $FIND_SINGULAR_UNDERSCORE_LOWER $REPLACE_SINGULAR_UNDERSCORE_LOWER
+replaceContents $FIND_PLURAL_UNDERSCORE_LOWER $REPLACE_PLURAL_UNDERSCORE_LOWER
+
+  # Replace random string in ACF fields
+replaceContents "5aebb" $RAND
 
   # Remove the $FILLERSPACE
 replaceContents $FILLERSPACE " "

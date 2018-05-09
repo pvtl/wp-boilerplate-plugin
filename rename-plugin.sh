@@ -16,6 +16,7 @@ RESET="\e[39m"
 BLUE="\e[34m"
 UNDERLINE="\e[4m"
 NO_UNDERLINE="\e[0m"
+FILLERSPACE="FILLERSPACE"
 
 FIND_SINGULAR="Plugin\sPlaceholder"
 FIND_PLURAL="Plugin\sPlaceholders"
@@ -43,8 +44,8 @@ REPLACE_PLURAL_SLUG=`echo "$REPLACE_PLURAL" | tr " " - | tr '[:upper:]' '[:lower
 
 FIND_SINGULAR_LOWER="plugin\splaceholder"
 FIND_PLURAL_LOWER="plugin\splaceholders"
-REPLACE_SINGULAR_LOWER=`echo "$REPLACE_SINGULAR" | tr '[:upper:]' '[:lower:]'`
-REPLACE_PLURAL_LOWER=`echo "$REPLACE_PLURAL" | tr '[:upper:]' '[:lower:]'`
+REPLACE_SINGULAR_LOWER=`echo "$REPLACE_SINGULAR" | tr '[:upper:]' '[:lower:]' | sed -e 's/ /'"$FILLERSPACE"'/g'`
+REPLACE_PLURAL_LOWER=`echo "$REPLACE_PLURAL" | tr '[:upper:]' '[:lower:]' | sed -e 's/ /'"$FILLERSPACE"'/g'`
 
 FIND_SINGULAR_SPACELESS="PluginPlaceholder"
 FIND_PLURAL_SPACELESS="PluginPlaceholders"
@@ -61,6 +62,9 @@ FIND_PLURAL_UNDERSCORE_LOWER="plugin_placeholders"
 REPLACE_SINGULAR_UNDERSCORE_LOWER=`echo "$REPLACE_SINGULAR" | tr " " _ | tr '[:upper:]' '[:lower:]'`
 REPLACE_PLURAL_UNDERSCORE_LOWER=`echo "$REPLACE_PLURAL" | tr " " _ | tr '[:upper:]' '[:lower:]'`
 
+REPLACE_SINGULAR=`echo "$REPLACE_SINGULAR" | sed -e 's/ /'"$FILLERSPACE"'/g'`
+REPLACE_PLURAL=`echo "$REPLACE_PLURAL" | sed -e 's/ /'"$FILLERSPACE"'/g'`
+
 # Functions
 # =========================================================
 # Find/Replace File Names
@@ -75,7 +79,7 @@ replaceFileNames () {
 replaceContents () {
     for file in $(find . -type f -name '*.php' -o -name '*.md' -o -name '*.json')
     do
-      sed -i s/$1/$2/g $file
+      sed -i 's/'"$1"'/'"$2"'/g' $file
     done
 }
 
@@ -109,3 +113,6 @@ replaceContents $FIND_SINGULAR_UNDERSCORE $REPLACE_SINGULAR_UNDERSCORE
   # Lowercase Underscore - eg. case_study and case_studies
 replaceContents $FIND_PLURAL_UNDERSCORE_LOWER $REPLACE_PLURAL_UNDERSCORE_LOWER
 replaceContents $FIND_SINGULAR_UNDERSCORE_LOWER $REPLACE_SINGULAR_UNDERSCORE_LOWER
+
+  # Remove the $FILLERSPACE
+replaceContents $FILLERSPACE " "

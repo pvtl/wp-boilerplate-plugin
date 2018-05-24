@@ -77,7 +77,7 @@ class PluginPlaceholders
     public function fronendTemplates($template)
     {
         // When an archive - try the theme version otherwise use the default plugin version
-        if (is_archive($this->postType)
+        if (is_post_type_archive($this->postType)
             && $template !== locate_template(array('archive-' . $this->postType . '.php'))) {
             return plugin_dir_path(__FILE__) .'resources/views/archive.php';
         }

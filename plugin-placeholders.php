@@ -23,6 +23,9 @@ class PluginPlaceholders
     // The post type's slug eg. plugin-placeholder
     protected $postType = 'plugin-placeholder';
 
+    // The taxonomies for this post type (assumes taxonomy name and file name as the same)
+    protected $taxonomies = array('plugin-placeholder-category');
+    
     // The assets (css/js) to be copied from the plugin to the theme
     protected $frontendAssets = array(
         array(
@@ -39,10 +42,12 @@ class PluginPlaceholders
 
     public function __construct()
     {
-        // Setup the custom post type, tax and add fields
+        // Setup the custom post type, add fields and taxonomies
         include(dirname(__FILE__). '/post-types/' . $this->postType . '.php');
         include(dirname(__FILE__). '/taxonomies/' . $this->postType . '-category.php');
-        include(dirname(__FILE__). '/custom-fields/' . $this->postType . '.php');
+        foreach ($this->taxonomies as $tax) {
+            include(dirname(__FILE__). '/taxonomies/' . $tax . '.php');
+        }
 
         // Call the actions/hooks
         add_action('admin_notices', array($this, 'acfNotInstalledAdminError'));
@@ -77,7 +82,7 @@ class PluginPlaceholders
     public function fronendTemplates($template)
     {
         // When an archive - try the theme version otherwise use the default plugin version
-        if (is_post_type_archive($this->postType)
+        if ((is_post_type_archive($this->postType) || is_tax($this->taxonomies))
             && $template !== locate_template(array('archive-' . $this->postType . '.php'))) {
             return plugin_dir_path(__FILE__) .'resources/views/archive.php';
         }

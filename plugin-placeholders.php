@@ -82,8 +82,14 @@ class PluginPlaceholders
     public function fronendTemplates($template)
     {
         // When an archive - try the theme version otherwise use the default plugin version
-        if ((is_post_type_archive($this->postType) || is_tax($this->taxonomies))
+        if (is_post_type_archive($this->postType)
             && $template !== locate_template(array('archive-' . $this->postType . '.php'))) {
+            return plugin_dir_path(__FILE__) .'resources/views/archive.php';
+        }
+
+        // When a taxonomy - try the theme version otherwise use the default plugin version
+        if (is_tax($this->taxonomies)
+            && $template !== locate_template(array('taxonomy-' . $this->postType . '.php'))) {
             return plugin_dir_path(__FILE__) .'resources/views/archive.php';
         }
 
